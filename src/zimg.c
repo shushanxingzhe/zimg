@@ -114,7 +114,7 @@ int save_img(thr_arg_t *thr_arg, const char *buff, const int len, char *md5) {
         LOG_PRINT(LOG_DEBUG, "save_path[%s] Create Finish.", save_path);
     }
 
-    snprintf(save_name, 512, "%s/0*0", save_path);
+    snprintf(save_name, 512, "%s/0_0", save_path);
     LOG_PRINT(LOG_DEBUG, "save_name-->: %s", save_name);
 
     if (is_file(save_name) == 1) {
@@ -230,7 +230,7 @@ int get_img(zimg_req_t *req, evhtp_request_t *request) {
     LOG_PRINT(LOG_DEBUG, "Start to Find the Image...");
 
     char orig_path[512];
-    snprintf(orig_path, 512, "%s/0*0", whole_path);
+    snprintf(orig_path, 512, "%s/0_0", whole_path);
     LOG_PRINT(LOG_DEBUG, "0rig File Path: %s", orig_path);
 
     char rsp_path[512];
@@ -238,7 +238,7 @@ int get_img(zimg_req_t *req, evhtp_request_t *request) {
         snprintf(rsp_path, 512, "%s/t_%s", whole_path, req->type);
     else {
         char name[128];
-        snprintf(name, 128, "%d*%d_p%d_g%d_%d*%d_r%d_q%d.%s", req->width, req->height,
+        snprintf(name, 128, "%d_%d_p%d_g%d_%d*%d_r%d_q%d.%s", req->width, req->height,
                  req->proportion,
                  req->gray,
                  req->x, req->y,
@@ -453,7 +453,7 @@ int info_img(evhtp_request_t *request, thr_arg_t *thr_arg, char *md5) {
     }
 
     char orig_path[512];
-    snprintf(orig_path, 512, "%s/0*0", whole_path);
+    snprintf(orig_path, 512, "%s/0_0", whole_path);
     LOG_PRINT(LOG_DEBUG, "0rig File Path: %s", orig_path);
 
     im = NewMagickWand();
